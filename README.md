@@ -6,6 +6,13 @@ See `tests/test_input_argument_validity.R` for the actual tests for validity of 
 See `tests/test_roman_numeral_conversiona.R` for the actual tests for converstions.  
 See `code/roman_numeral.R` for the actual code used for conversion.  
 
+In order to be able to run the example the `testthat` package needs to be locally installed
+
+```r
+#Using the CRAN repo
+install.packages("testthat")
+```
+
 ## Assumption
 
 * Be sure that the working directory is set to the parent directory of `code` and `tests` folders.
