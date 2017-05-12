@@ -1,5 +1,5 @@
 convert_to_roman <- function(num){
-  if(!is.integer(num)) stop("must be integer")
+  if(!is.integer(num) || num <= 0L) stop("must be integer")
 
   roman_numeral <- NULL
   decimal_values <- c(10L, 9L, 5L,4L, 1L)

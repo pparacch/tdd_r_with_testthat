@@ -1,6 +1,8 @@
 # README
 
-Using a TDD approach with the support of the `testthat` package to solve teh roman conversion algorithm challenge in R.
+Using a TDD approach with the support of the `testthat` package to solve a simple problem in R: implement a roman conversion algorithm.
+
+The main focus is on the practice of Test Driven Development and not the code created.
 
 See `tests/test_input_argument_validity.R` for the actual tests for validity of input argument.  
 See `tests/test_roman_numeral_conversiona.R` for the actual tests for converstions.  
@@ -22,18 +24,20 @@ install.packages("testthat")
 
 ## TDD approach: step by step
 
-### Start Up
+### Starting Up
 
-__think about the design of the code__  
+__Think about the design of the code__, in this case the function that we want to develop  
 
 * where to put the function, e.g folder, file
 * name of the function
 * function parameter(s)
+    * what type of parameter(s)
+    * any assumption(s) on the possible values
 
-__implement the function shell__  
+__Implement the shell of the function__ , with a very simplicistic implementation 
 
-* it accept an argument (any)
-* it returns a "I" value (simplification)
+* it accept an argument (any type)
+* it returns a "I" value (hardcoded simplification)
 
 
 ```r
@@ -42,12 +46,16 @@ convert_to_roman <- function(num){
 }
 ```
 
-__before writing any code, write a failing test__
+__The TDD mindset__, before writing any code 
 
-* simplest modification to the code in order to make it pass - cut & paste allowed
-* when all tests passing - refactor the code using the tests as a safety net
+* write a failing test, and then 
+* make the simplest change to the code in order to make it pass (cut & paste allowed)
+* re-run all tests, and when all tests are passing
+* refactor the existing code using the tests as a safety net
+* repeat for a new test condition
 
-### And then, incremental design, one small step at a time
+
+### Applied Incremental Design, one small step at a time
 
 #### Step1, the argument must be integer otherwise an exception is thrown
 
@@ -55,8 +63,7 @@ __before writing any code, write a failing test__
 
 * Add expectation: pass 1 return an error
     * Will fail cause an error is not thrown
-* Modify the code in order to make it pass
-            
+
 ```r
 #Add expectation
 context("Input Argument Validity")
@@ -67,6 +74,8 @@ test_that("passing a non numeric/ integer an exception is thrown",{
 }
 ```
 
+* Modify the code in order to make it pass
+            
 ```r
 #Modify the code
 convert_to_roman <- function(num){
@@ -77,6 +86,17 @@ convert_to_roman <- function(num){
 
 * Add expectation: pass 3.14 return an error
     * Will pass (same condition as before just a different argument)
+    
+```r
+#Add expectations
+context("Input Argument Validity")
+
+test_that("passing a non numeric/ integer an exception is thrown",{
+  expect_error(object = convert_to_roman(1))
+  expect_error(object = convert_to_roman(3.14))
+})
+```
+    
 * Add expectation: pass a string return an error
     * Will pass (same condition as before just a different type for argument)
 
@@ -128,9 +148,8 @@ test_that("passing an integer between [1..3] the correct roman numeral is return
 })
 ```
 
-* Add expectation: pass 2L return "II" (and repeat for 3 return "III")
+* Add expectation: pass 2L return "II"
     * Will fail cause wrong roman numeral is returned
-    * Modify the code in order to make it pass
 
 ```r
 #Create a new context, a new test and add expectation
@@ -142,6 +161,8 @@ test_that("passing an integer between [1..3] the correct roman numeral is return
 })
 ```
 
+* Modify the code in order to make it pass 
+
 ```r
 #Modify the code
 convert_to_roman <- function(num){
@@ -150,6 +171,8 @@ convert_to_roman <- function(num){
   if (num == 2L) return("II")
 }
 ```
+
+Repeat for 3 return "III": add expectation (make the test fail) and modify the code (make the test pass)
 
 ```r
 #Create a new context, a new test and add expectation
@@ -176,7 +199,6 @@ convert_to_roman <- function(num){
 
 * Add expectation: pass 4L return "IV" 
     * Will fail cause wrong roman numeral is returned
-    * Modify the code in order to make it pass
 
 ```r
 #Add a new test and add expectation
@@ -193,6 +215,8 @@ test_that("passing an integer 4 the correct roman numeral is returned",{
 })
 ```
 
+* Modify the code in order to make it pass
+
 ```r
 #Modify the code
 convert_to_roman <- function(num){
@@ -208,9 +232,11 @@ convert_to_roman <- function(num){
 
 * Add expectation: pass 5L return "V" 
     * Will fail cause wrong roman numeral is returned
-    * Modify the code in order to make it pass
+* Modify the code in order to make it pass
 
-Continue one simple step at a time ..... and the code performing that specifical function is shaped incrementally, one smal step after the other. Using this simple approach the final tests and code will look like
+Continue one simple step at a time ..... 
+
+Note that the code implementing that function is shaped incrementally, one smal step after the other. Using this simple approach the final tests and code will look like
 
 ```r
 #Test for the conversion [1..10]
@@ -263,7 +289,11 @@ convert_to_roman <- function(num){
 }
 ```
 
-Once we have a test harness around the code we can __start to refactor the code__ in order to get a more legant solution like 
+Once we have a test harness around the code we can __start to refactor the code__ in order to get a more general and flexible solution
+
+* change the code/ refactor
+* run all tests and make them pass
+* repeat till you are satisfied
 
 ```r
 convert_to_roman <- function(num){
