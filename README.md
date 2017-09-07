@@ -157,7 +157,7 @@ context("Roman Numeral Conversion")
 
 test_that("passing an integer between [1..3] the correct roman numeral is returned",{
   expect_match(object = convert_to_roman(1L), regexp = "^I$")
-  expect_match(object = convert_to_roman(1L), regexp = "^II$")
+  expect_match(object = convert_to_roman(2L), regexp = "^II$")
 })
 ```
 
@@ -180,8 +180,8 @@ context("Roman Numeral Conversion")
 
 test_that("passing an integer between [1..3] the correct roman numeral is returned",{
   expect_match(object = convert_to_roman(1L), regexp = "^I$")
-  expect_match(object = convert_to_roman(1L), regexp = "^II$")
-  expect_match(object = convert_to_roman(1L), regexp = "^III$")
+  expect_match(object = convert_to_roman(2L), regexp = "^II$")
+  expect_match(object = convert_to_roman(3L), regexp = "^III$")
 })
 ```
 
