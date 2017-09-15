@@ -1,26 +1,33 @@
 # README
 
-Using a TDD approach with the support of the `testthat` package to solve a simple problem in R: implement a roman conversion algorithm.
+This is an __hands-on exercise__ on using __TDD with R__ to solve a simple problem: implement a simple roman conversion algorithm. The main focus is on the practice of Test Driven Development and not the code/ algorithm created.
 
-The main focus is on the practice of Test Driven Development and not the code created.
+The following artifacts have been created 
 
-See `tests/test_input_argument_validity.R` for the actual tests for validity of input argument.  
-See `tests/test_roman_numeral_conversiona.R` for the actual tests for converstions.  
-See `code/roman_numeral.R` for the actual code used for conversion.  
+- `tests/test_input_argument_validity.R`, the current tests used for validity of input argument.  
+- `tests/test_roman_numeral_conversiona.R`, the current tests used for converstions.  
+- `code/roman_numeral.R`, the code used for the conversion.  
 
-In order to be able to run the example the `testthat` package needs to be locally installed
+In order to be able to run the example the following packages need to be locally installed
+
+- the `checkpoint` package used for reproducibility,
+- the `testthat` package used for unit testing.
 
 ```r
 #Using the CRAN repo
+install.packages("checkpoint")
 install.packages("testthat")
 ```
+
+More information on how the `testthat` package can be found in the following blog ["TDD and unit testing in R using the 'testthat' package"](https://pparacch.github.io/2017/05/18/test_driven_development_in_r.html)
 
 ## Assumption
 
 * Be sure that the working directory is set to the parent directory of `code` and `tests` folders.
 * Run the set up file using `source("set_up_env.R")`
-    * the __Autotest__ modality is switched on using the `auto_test()` function
-        * __every change to code or tests will trigger the running of all tests__
+    * run `checkpoint("2017-09-15")` to be sure to have the correct version of the packages 
+    * set the folders used for the _code_ and _tests_ and switched on the __Autotest__ modality using the `auto_test()` function
+    * all of the unit tests are run and __every change to code or tests (from now on) will trigger the running of all tests__ 
 
 ## TDD approach: step by step
 
@@ -311,4 +318,25 @@ convert_to_roman <- function(num){
   }
   return(roman_numeral)
 }
+```
+
+## Session Info
+
+```r
+> sessionInfo()
+R version 3.3.3 (2017-03-06)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: macOS Sierra 10.12.6
+
+locale:
+[1] no_NO.UTF-8/no_NO.UTF-8/no_NO.UTF-8/C/no_NO.UTF-8/no_NO.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] testthat_1.0.2   checkpoint_0.4.1
+
+loaded via a namespace (and not attached):
+[1] magrittr_1.5  R6_2.2.2      tools_3.3.3   crayon_1.3.2  digest_0.6.12
 ```
